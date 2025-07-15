@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>💬 Chat dengan Gemma AI</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #f2f4f8;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      h2 {
+        margin-top: 30px;
+        color: #333;
+      }
+
+      #chat-box {
+        width: 90%;
+        max-width: 600px;
+        background: white;
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+        max-height: 60vh;
+      }
+
+      .message {
+        margin-bottom: 12px;
+        display: flex;
+      }
+
+      .message.user {
+        justify-content: flex-end;
+      }
+
+      .message.ai {
+        justify-content: flex-start;
+      }
+
+      .bubble {
+        padding: 10px 14px;
+        border-radius: 18px;
+        max-width: 75%;
+        line-height: 1.4;
+        font-size: 15px;
+      }
+
+      .bubble.user {
+        background-color: #d1ecf1;
+        color: #0c5460;
+        border-bottom-right-radius: 0;
+      }
+
+      .bubble.ai {
+        background-color: #e6ffe8;
+        color: #14532d;
+        border-bottom-left-radius: 0;
+        white-space: pre-wrap;
+        line-height: 1.5;
+      }
+
+      #input-section {
+        margin-top: 20px;
+        width: 90%;
+        max-width: 600px;
+        display: flex;
+      }
+
+      #input {
+        flex-grow: 1;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 6px 0 0 6px;
+        border: 1px solid #ccc;
+        outline: none;
+      }
+
+      #send-btn {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        background-color: #16a085;
+        color: white;
+        border-radius: 0 6px 6px 0;
+        cursor: pointer;
+      }
+
+      #send-btn:hover {
+        background-color: #12876f;
+      }
+
+      .loading {
+        font-style: italic;
+        opacity: 0.6;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>💬 Chat dengan Gemma 3:1B</h2>
+
+    <div id="chat-box"></div>
+
+    <div id="input-section">
+      <input type="text" id="input" placeholder="Tulis pertanyaan di sini..." />
+      <button id="send-btn" onclick="sendMessage()">Kirim</button>
+    </div>
+
+    <script>
+      async function sendMessage() {
+        const input = document.getElementById("input");
+        const chatBox = document.getElementById("chat-box");
+        const message = input.value.trim();
+        if (!message) return;
+
+        // Tampilkan pesan user
+        chatBox.innerHTML += `
+        <div class="message user">
+          <div class="bubble user">👤 ${message}</div>
+        </div>`;
+        input.value = "";
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        // Tampilkan loading
+        const loadingId = "loading-msg";
+        chatBox.innerHTML += `
+        <div class="message ai" id="${loadingId}">
+          <div class="bubble ai loading">🤖 Gemma sedang mengetik...</div>
+        </div>`;
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        try {
+          const res = await fetch("/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message }),
+          });
+
+          const data = await res.json();
+
+          // Ganti loading dengan jawaban AI
+          const loadingElement = document.getElementById(loadingId);
+          if (loadingElement) {
+            const formattedReply = data.reply.trim();
+            loadingElement.outerHTML = `
+  <div class="message ai">
+    <div class="bubble ai">🤖 ${formattedReply}</div>
+  </div>`;
+          }
+
+          chatBox.scrollTop = chatBox.scrollHeight;
+        } catch (err) {
+          const loadingElement = document.getElementById(loadingId);
+          if (loadingElement) {
+            loadingElement.outerHTML = `
+            <div class="message ai">
+              <div class="bubble ai" style="color:red">❌ Gagal mendapatkan balasan</div>
+            </div>`;
+          }
+        }
+      }
+
+      // Tekan Enter = kirim
+      document
+        .getElementById("input")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") sendMessage();
+        });
+    </script>
+  </body>
+</html>

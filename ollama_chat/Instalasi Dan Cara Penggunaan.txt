@@ -1,0 +1,48 @@
+======================
+Ollama Chat Project - Gemma3:1B
+======================
+
+🧠 Deskripsi:
+Proyek ini membuat UI chat sederhana yang menggunakan model AI `gemma3:1b` yang berjalan di Ollama. Anda bisa mengetik pertanyaan, lalu jawaban dari model ditampilkan.
+
+======================
+📥 Instalasi & Setup
+======================
+
+1. Install Ollama:
+   https://ollama.com/download
+
+2. Jalankan perintah ini di terminal untuk download model:
+   > ollama run gemma3:1b
+
+3. Clone atau copy folder ini.
+
+4. Install dependencies untuk server Node.js:
+   > npm install express node-fetch
+
+5. Jalankan server:
+   > node server.js
+
+6. Buka browser:
+   http://localhost:3000
+
+======================
+🧪 Cara Testing
+======================
+
+1. Ketik pertanyaan di input.
+2. Klik tombol "Kirim".
+3. Model AI akan memberikan balasan di bawahnya.
+
+Pastikan Ollama sudah aktif dan model `gemma3:1b` sudah tersedia.
+
+======================
+📁 Struktur File
+======================
+- public/index.html  : UI Frontend Chat
+- server.js          : Backend Express API
+- readme.txt         : File ini
+
+======================
+✅ Selesai
+======================
