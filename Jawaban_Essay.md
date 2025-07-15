@@ -32,7 +32,7 @@ Halaman juga sudah berisi info info artikel mengenai teknologi, hal ini juga dap
 
 ![alt text](https://github.com/ryankurniantara/biznet_technical_test/blob/main/images/7.jpg?raw=true)
  	
-**• Apakah hal-hal yang bisa anda improve dari website tersebut agar dapat memaksimalkan SEO nya? **     
+# **• Apakah hal-hal yang bisa anda improve dari website tersebut agar dapat memaksimalkan SEO nya?**     
 
 	Untuk memaksimalkan SEO di website Biznet, ada beberapa hal yang bisa ditingkatkan : 
 	Di bagian konten, saya melihat ada  gambar-gambar belum diberi deskripsi (alt text) yang sesuai, mengisi semua alt text di setiap gambar
@@ -43,7 +43,7 @@ Halaman juga sudah berisi info info artikel mengenai teknologi, hal ini juga dap
 	Mengaktifkan listing di Google Business Profile.
 
 
-**• Apakah yang bisa anda lakukan untuk mempercepat load dari halaman website tersebut?**
+# **• Apakah yang bisa anda lakukan untuk mempercepat load dari halaman website tersebut?**
 
 Optimalisasi Front-End:
 	Kompresi gambar menggunakan format modern (WebP, AVIF).
@@ -58,11 +58,11 @@ Server-Side & Infrastruktur:
 	Aktifkan gzip atau Brotli compression di server.
 
 
-**•  Anggaplah anda sedang menangani sebuah aplikasi, kemudian terjadi sebuah masalah dimana ketika ada 100 request sekaligus ke aplikasi anda yang menyebabkan aplikasi anda crash / hang. Jelaskan bagaimana anda mengatasi situasi ini?**
+# **•  Anggaplah anda sedang menangani sebuah aplikasi, kemudian terjadi sebuah masalah dimana ketika ada 100 request sekaligus ke aplikasi anda yang menyebabkan aplikasi anda crash / hang. Jelaskan bagaimana anda mengatasi situasi ini?**
 
 Hal pertama yang saya lakukan adalah cari tahu titik lemah sistemnya di mana. Saya cek dulu apakah yang bikin berat itu proses databasenya, atau mungkin ada request yang terlalu kompleks.Lalu, supaya beban aplikasi nggak ditangani langsung secara bersamaan, saya coba pisahkan proses-proses yang berat ke jalur belakang (background). Misalnya, kalau ada proses kirim email atau simpan data besar, itu saya dorong ke sistem antrian. Jadi user tetap dapat respon cepat, sementara proses di belakang jalan sendiri.Selain itu, saya juga mulai menerapkan pembatasan request biar satu user nggak bisa spam terlalu banyak dalam waktu bersamaan. Ini bantu banget meringankan beban server.Dan yang nggak kalah penting, saya coba gunakan cache buat data yang sering dipakai. Jadi sistem nggak perlu hit database terus-terusan untuk data yang sama.Kalau kasusnya memang udah berat banget, saya akan pikirkan untuk bagi beban ke beberapa server (load balancing), supaya nggak semua beban numpuk di satu tempat aja.Intinya: saya usahakan sistem tetap responsif dengan cara memecah pekerjaan, membatasi beban, dan menyederhanakan hal-hal yang bisa di-cache. Bukan soal langsung ganti server besar, tapi lebih ke cara kita ngatur alur kerja aplikasi itu sendiri.
 
-**•	Bagaimanakah cara anda mengatasi Race Condition pada aplikasi anda? Jelaskan beserta contohnya.** 
+# **•	Bagaimanakah cara anda mengatasi Race Condition pada aplikasi anda? Jelaskan beserta contohnya.** 
 
    Race condition itu terjadi ketika dua atau lebih proses berjalan bersamaan dan mencoba mengakses atau mengubah data yang sama, sehingga bisa menyebabkan hasil yang tidak sesuai atau data menjadi tidak konsisten. Walaupun saya belum pernah mengalami langsung, saya tahu cara menghindarinya bisa dilakukan dengan beberapa pendekatan umum, misalnya:
 
