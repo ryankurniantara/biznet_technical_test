@@ -64,9 +64,7 @@ Struktur Folder:
 
 barcode-generator/
 ├── index.php         --> Form input dan preview
-├── generate.php      --> Menampilkan gambar barcode/QR
 ├── composer.json     --> File composer
-├── vendor/           --> Hasil install library
 
 -------------------------------------------
 Catatan:
